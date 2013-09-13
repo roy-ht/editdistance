@@ -117,15 +117,15 @@ unsigned int edit_distance(int64_t const *a, unsigned int const asize, int64_t c
     return edit_distance_dp<int64_t>(ap, *asizep, bp, *bsizep);  // dynamic programmingに任せる
 }
 
-void create_patternmap(PatternMap *pm, int64_t const *a, unsigned int const size) {
-    pm->tmax_ = (size - 1) >> 6;
-    pm->tlen_ = size - pm->tmax_ * 64;
-    for(size_t i = 0; i < pm->tmax_; ++i) {
-        for(size_t j = 0; j < 64; ++j) pm->p_[a[i * 64 + j]][i] |= (1L << j);
-    }
-    for(size_t i = 0; i < pm->tlen_; ++i) pm->p_[a[pm->tmax_ * 64 + i]][pm->tmax_] |= (1L << i);
-}
+// void create_patternmap(PatternMap *pm, int64_t const *a, unsigned int const size) {
+//     pm->tmax_ = (size - 1) >> 6;
+//     pm->tlen_ = size - pm->tmax_ * 64;
+//     for(size_t i = 0; i < pm->tmax_; ++i) {
+//         for(size_t j = 0; j < 64; ++j) pm->p_[a[i * 64 + j]][i] |= (1L << j);
+//     }
+//     for(size_t i = 0; i < pm->tlen_; ++i) pm->p_[a[pm->tmax_ * 64 + i]][pm->tmax_] |= (1L << i);
+// }
 
-unsigned int edit_distance_by_patternmap(PatternMap *pm, const int64_t *b, const unsigned int size) {
-    return edit_distance_bpv<uint64_t[256][4], uint64_t[4]>(pm->p_, b, size, pm->tmax_, pm->tlen_);
-}
+// unsigned int edit_distance_by_patternmap(PatternMap *pm, const int64_t *b, const unsigned int size) {
+//     return edit_distance_bpv<uint64_t[256][4], uint64_t[4]>(pm->p_, b, size, pm->tmax_, pm->tlen_);
+// }

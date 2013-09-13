@@ -1,2 +1,2 @@
-from .byctypes import eval, EditDistance
-__all__ = ('eval', 'EditDistance')
+from .bycython import eval
+__all__ = ('eval',)
