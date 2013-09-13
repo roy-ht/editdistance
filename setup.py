@@ -25,7 +25,7 @@ except:
 
 ext_modules = [Extension('editdistance.bycython', ['editdistance/_editdistance.cpp', 'editdistance/bycython.cpp'])]
 
-setup(name="levenshtein",
+setup(name="editdistance",
       version='0.1',
       description="Fast implementation of the edit distance(Levenshtein distance)",
       long_description='',
@@ -34,6 +34,7 @@ setup(name="levenshtein",
       url='https://www.github.com/aflc/levenshtein',
       ext_modules=ext_modules,
       packages=['editdistance'],
+      package_data={'editdistance': ['_editdistance.h']},
       classifiers=[
       'License :: OSI Approved :: MIT License',
       'Programming Language :: Python',
