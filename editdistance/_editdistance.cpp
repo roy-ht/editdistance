@@ -98,7 +98,7 @@ unsigned int edit_distance_map_(int64_t const *a, size_t const asize, int64_t co
 }
 
 
-unsigned int edit_distance(int64_t const *a, unsigned int const asize, int64_t const *b, unsigned int const bsize) {
+unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int64_t *b, const unsigned int bsize) {
     if(asize == 0) return bsize;
     else if(bsize == 0) return asize;
     // 要素数の大きいほうがa

@@ -23,7 +23,9 @@ except:
 # from Cython.Build import cythonize
 # ext_modules = cythonize('editdistance/bycython.pyx')
 
-ext_modules = [Extension('editdistance.bycython', ['editdistance/_editdistance.cpp', 'editdistance/bycython.cpp'])]
+ext_modules = [Extension('editdistance.bycython',
+                         ['editdistance/_editdistance.cpp', 'editdistance/bycython.cpp'],
+                         include_dirs=['./editdistance'])]
 
 setup(name="editdistance",
       version='0.2',
@@ -34,7 +36,7 @@ setup(name="editdistance",
       url='https://www.github.com/aflc/editdistance',
       ext_modules=ext_modules,
       packages=['editdistance'],
-      # package_data={'editdistance': ['_editdistance.h']},
+      package_data={'editdistance': ['_editdistance.h']},
       classifiers=[
       'License :: OSI Approved :: MIT License',
       'Programming Language :: Python',
