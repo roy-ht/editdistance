@@ -2,6 +2,7 @@
 #define ___EDITDISTANCE__H__
 
 #include <stdint.h>
+#include <algorithm>
 
 #ifdef __cplusplus
 extern "C" {

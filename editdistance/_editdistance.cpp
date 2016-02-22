@@ -30,27 +30,27 @@ template<typename T, typename TVALUE>
 unsigned int edit_distance_bpv(T &cmap, int64_t const *vec, size_t const &vecsize, unsigned int const &tmax, unsigned int const &tlen) {
     int D = tmax * 64 + tlen;
     TVALUE D0, HP, HN, VP, VN;
-    uint64_t top = (1L << (tlen - 1));  // 末尾のvectorに適用
-    uint64_t lmb = (1L << 63);
+    uint64_t top = (1LL << (tlen - 1));  // 末尾のvectorに適用
+    uint64_t lmb = (1LL << 63);
 
     for(size_t i = 0; i <= tmax; ++i) {
         VP[i] = 0;
         VN[i] = 0;
     }
     for(size_t i = 0; i < tmax; ++i) VP[i] = ~0;
-    for(size_t i = 0; i < tlen; ++i) VP[tmax] |= (1L << i);
+    for(size_t i = 0; i < tlen; ++i) VP[tmax] |= (1LL << i);
     for(size_t i = 0; i < vecsize; ++i) {
         TVALUE &PM = cmap[vec[i]];
         for(int r = 0; r <= tmax; ++r) {
             uint64_t X = PM[r];
-            if(r > 0 && (HN[r - 1] & lmb)) X |= 1L;
+            if(r > 0 && (HN[r - 1] & lmb)) X |= 1LL;
             D0[r] = (((X & VP[r]) + VP[r]) ^ VP[r]) | X | VN[r];
             HP[r] = VN[r] | ~(D0[r] | VP[r]);
             HN[r] = D0[r] & VP[r];
-            X = (HP[r] << 1L);
-            if(r == 0 || HP[r - 1] & lmb) X |= 1L;
-            VP[r] = (HN[r] << 1L) | ~(D0[r] | X);
-            if(r > 0 && (HN[r - 1] & lmb)) VP[r] |= 1L;
+            X = (HP[r] << 1LL);
+            if(r == 0 || HP[r - 1] & lmb) X |= 1LL;
+            VP[r] = (HN[r] << 1LL) | ~(D0[r] | X);
+            if(r > 0 && (HN[r - 1] & lmb)) VP[r] |= 1LL;
             VN[r] = D0[r] & X;
         }
         if(HP[tmax] & top) ++D;
@@ -91,9 +91,9 @@ unsigned int edit_distance_map_(int64_t const *a, size_t const asize, int64_t co
     unsigned int tmax = (asize - 1) >> 6;
     unsigned int tlen = asize - tmax * 64;
     for(size_t i = 0; i < tmax; ++i) {
-        for(size_t j = 0; j < 64; ++j) cmap[a[i * 64 + j]][i] |= (1L << j);
+        for(size_t j = 0; j < 64; ++j) cmap[a[i * 64 + j]][i] |= (1LL << j);
     }
-    for(size_t i = 0; i < tlen; ++i) cmap[a[tmax * 64 + i]][tmax] |= (1L << i);
+    for(size_t i = 0; i < tlen; ++i) cmap[a[tmax * 64 + i]][tmax] |= (1LL << i);
     return edit_distance_bpv<cmap_v, typename cmap_v::mapped_type>(cmap, b, bsize, tmax, tlen);
 }
 
@@ -133,9 +133,9 @@ unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int
 //     pm->tmax_ = (size - 1) >> 6;
 //     pm->tlen_ = size - pm->tmax_ * 64;
 //     for(size_t i = 0; i < pm->tmax_; ++i) {
-//         for(size_t j = 0; j < 64; ++j) pm->p_[a[i * 64 + j]][i] |= (1L << j);
+//         for(size_t j = 0; j < 64; ++j) pm->p_[a[i * 64 + j]][i] |= (1LL << j);
 //     }
-//     for(size_t i = 0; i < pm->tlen_; ++i) pm->p_[a[pm->tmax_ * 64 + i]][pm->tmax_] |= (1L << i);
+//     for(size_t i = 0; i < pm->tlen_; ++i) pm->p_[a[pm->tmax_ * 64 + i]][pm->tmax_] |= (1LL << i);
 // }
 
 // unsigned int edit_distance_by_patternmap(PatternMap *pm, const int64_t *b, const unsigned int size) {
