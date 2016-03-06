@@ -13,7 +13,6 @@
 //     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-#include <stdint.h>
 #include <cstdlib>
 #include <cstring>
 #include <string>
@@ -21,6 +20,7 @@
 #include <vector>
 #include <iostream>
 #include <bitset>
+#include <algorithm>
 
 #include "./_editdistance.h"
 
@@ -128,16 +128,3 @@ unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int
     else if(vsize == 10) return edit_distance_map_<10>(ap, *asizep, bp, *bsizep);
     return edit_distance_dp<int64_t>(ap, *asizep, bp, *bsizep);  // dynamic programmingに任せる
 }
-
-// void create_patternmap(PatternMap *pm, int64_t const *a, unsigned int const size) {
-//     pm->tmax_ = (size - 1) >> 6;
-//     pm->tlen_ = size - pm->tmax_ * 64;
-//     for(size_t i = 0; i < pm->tmax_; ++i) {
-//         for(size_t j = 0; j < 64; ++j) pm->p_[a[i * 64 + j]][i] |= (1LL << j);
-//     }
-//     for(size_t i = 0; i < pm->tlen_; ++i) pm->p_[a[pm->tmax_ * 64 + i]][pm->tmax_] |= (1LL << i);
-// }
-
-// unsigned int edit_distance_by_patternmap(PatternMap *pm, const int64_t *b, const unsigned int size) {
-//     return edit_distance_bpv<uint64_t[256][4], uint64_t[4]>(pm->p_, b, size, pm->tmax_, pm->tlen_);
-// }
