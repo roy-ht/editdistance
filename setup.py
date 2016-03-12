@@ -28,7 +28,7 @@ ext_modules = [Extension('editdistance.bycython',
                          include_dirs=['./editdistance'])]
 
 setup(name="editdistance",
-      version='0.3',
+      version='0.3.1',
       description="Fast implementation of the edit distance(Levenshtein distance)",
       long_description='',
       author='Hiroyuki Tanaka',
@@ -36,9 +36,9 @@ setup(name="editdistance",
       url='https://www.github.com/aflc/editdistance',
       ext_modules=ext_modules,
       packages=['editdistance'],
-      package_data={'editdistance': ['_editdistance.h']},
+      package_data={'editdistance': ['_editdistance.h', 'def.h']},
       classifiers=[
-      'License :: OSI Approved :: MIT License',
-      'Programming Language :: Python',
+          'License :: OSI Approved :: MIT License',
+          'Programming Language :: Python',
       ]
       )
