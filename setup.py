@@ -28,7 +28,7 @@ ext_modules = [Extension('editdistance.bycython',
                          include_dirs=['./editdistance'])]
 
 setup(name="editdistance",
-      version='0.2',
+      version='0.3',
       description="Fast implementation of the edit distance(Levenshtein distance)",
       long_description='',
       author='Hiroyuki Tanaka',
