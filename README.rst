@@ -2,12 +2,12 @@
 editdistance
 ============
 
-Fast implementation of the edit distance(Levenshtein distance).
+Fast implementation of the edit distance (Levenshtein distance).
 
 This library simply implements `Levenshtein distance <http://en.wikipedia.org/wiki/Levenshtein_distance>`_ with C++ and Cython.
 
 The algorithm used in this library is proposed by
-`Heikki Hyyrö, "Explaining and extending the bit-parallel approximate string matching algorithm of Myers", (2001). <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.19.7158&rep=rep1&type=pdf>`_.
+`Heikki Hyyrö, "Explaining and extending the bit-parallel approximate string matching algorithm of Myers", (2001) <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.19.7158&rep=rep1&type=pdf>`_.
 
 Tested on Python 2.7.5 and 3.3.2.
 
@@ -15,7 +15,9 @@ Tested on Python 2.7.5 and 3.3.2.
 Install
 -------
 
-You can install via pip::
+You can install via pip:
+
+.. code-block:: bash
 
     pip install editdistance
 
@@ -24,11 +26,13 @@ You can install via pip::
 Usage
 -----
 
-It's quite simple::
+It's quite simple:
 
-    >>> import editdistance
-    >>> editdistance.eval('banana', 'bahama')
-    2L
+.. code-block:: python
+
+    import editdistance
+    editdistance.eval('banana', 'bahama')
+    # 2L
 
 
 ----------------
@@ -37,33 +41,31 @@ Simple Benchmark
 
 With IPython, I tried several libraries:
 
-* [pyxDamerauLevenshtein](https://pypi.python.org/pypi/pyxDamerauLevenshtein)
-* [pylev](https://pypi.python.org/pypi/pylev)
-* [python-Levenshtein](https://pypi.python.org/pypi/python-Levenshtein)
+* `pyxDamerauLevenshtein <https://pypi.python.org/pypi/pyxDamerauLevenshtein>`_
+* `pylev <https://pypi.python.org/pypi/pylev>`_
+* `python-Levenshtein <https://pypi.python.org/pypi/python-Levenshtein>`_
 
-On Python 2.7.5::
+On Python 2.7.5:
 
-    In [12]: a = 'fsffvfdsbbdfvvdavavavavavava'
+.. code-block:: python
 
-    In [13]: b = 'fvdaabavvvvvadvdvavavadfsfsdafvvav'
-
-    In [14]: import pylev
-
-    In [15]: timeit pylev.levenshtein(a, b)
-    100 loops, best of 3: 7.48 ms per loop
-
-    In [16]: from pyxdameraulevenshtein import damerau_levenshtein_distance
-
-    In [17]: timeit damerau_levenshtein_distance(a, b)
-    100000 loops, best of 3: 11.4 µs per loop
-
-    In [19]: timeit editdistance.eval(a, b)  # my library
-    100000 loops, best of 3: 3.5 µs per loop
-
-    In [20]: import Levenshtein
-
-    In [21]: timeit Levenshtein.distance(a, b)
-    100000 loops, best of 3: 3.21 µs per loop
+    a = 'fsffvfdsbbdfvvdavavavavavava'
+    b = 'fvdaabavvvvvadvdvavavadfsfsdafvvav'
+    import pylev
+    timeit pylev.levenshtein(a, b)
+    # 100 loops, best of 3: 7.48 ms per loop
+    
+    from pyxdameraulevenshtein import damerau_levenshtein_distance
+    timeit damerau_levenshtein_distance(a, b)
+    # 100000 loops, best of 3: 11.4 µs per loop
+    
+    timeit editdistance.eval(a, b)  # my library
+    # 100000 loops, best of 3: 3.5 µs per loop
+    
+    import Levenshtein
+    
+    timeit Levenshtein.distance(a, b)
+    # 100000 loops, best of 3: 3.21 µs per loop
 
 
 ------------------------
@@ -72,21 +74,23 @@ Distance with Any Object
 
 Above libraries only support strings.
 But Sometimes other type of objects such as list of strings(words).
-I support any iterable, only requires hashable object of it::
+I support any iterable, only requires hashable object of it:
 
-    In [22]: Levenshtein.distance(['spam', 'egg'], ['spam', 'ham'])
-    ---------------------------------------------------------------------------
-    TypeError                                 Traceback (most recent call last)
-    <ipython-input-22-3e0b30d145ac> in <module>()
-    ----> 1 Levenshtein.distance(['spam', 'egg'], ['spam', 'ham'])
+.. code-block:: python
 
-    TypeError: distance expected two Strings or two Unicodes
-
-    In [29]: editdistance.eval(['spam', 'egg'], ['spam', 'ham'])
-    Out[29]: 1L
+    Levenshtein.distance(['spam', 'egg'], ['spam', 'ham'])
+    # ---------------------------------------------------------------------------
+    # TypeError                                 Traceback (most recent call last)
+    # <ipython-input-22-3e0b30d145ac> in <module>()
+    # ----> 1 Levenshtein.distance(['spam', 'egg'], ['spam', 'ham'])
+    #
+    # TypeError: distance expected two Strings or two Unicodes
+    
+    editdistance.eval(['spam', 'egg'], ['spam', 'ham'])
+    # 1L
 
 So if object's hash is same, it's same.
-You can provide `__hash__` method to your object instances.
+You can provide ``__hash__`` method to your object instances.
 
 Enjoy!
 
