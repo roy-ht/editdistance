@@ -3,10 +3,12 @@ os:
 - osx
 - linux
 env:
-- CIBW_TEST_COMMAND='python test/test_editdistance.py'
+  global:
+    - CIBW_TEST_REQUIRES=nose
+    - CIBW_TEST_COMMAND="nosetests {project}/test"
+
 script:
 - pip install cibuildwheel==0.6.0
-- pip install cython
 - cibuildwheel --output-dir wheelhouse
 - ls -alh wheelhouse
 
