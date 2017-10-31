@@ -1,4 +1,4 @@
-language: c
+language: ruby
 sudo: required
 os:
 - linux
