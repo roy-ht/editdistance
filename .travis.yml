@@ -1,14 +1,26 @@
-language: ruby
-sudo: required
-os:
-- linux
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+    - os: osx
+
+script:
+  - pip install cibuildwheel==0.6.0
+  - cibuildwheel --output-dir wheelhouse
+  
+  
+# language: ruby
+# sudo: required
+# os:
+# - linux
 # env:
 #   global:
 #     - CIBW_TEST_REQUIRES=nose
 #     - CIBW_TEST_COMMAND="nosetests {project}/test"
 
-script:
-- echo hello
+# script:
+# - echo hello
 # - pip install cibuildwheel==0.6.0
 # - cibuildwheel --output-dir wheelhouse
 
