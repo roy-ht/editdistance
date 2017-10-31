@@ -1,4 +1,3 @@
-language: python
 services: docker
 sudo: required
 os: [osx, linux]
