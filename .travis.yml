@@ -13,12 +13,12 @@ script:
 - cibuildwheel --output-dir wheelhouse
 - ls -alh wheelhouse
 
-deploy:
-  provider: releases
-  api_key:
-    secure: lJVNIXit3OVzJY+NuOhjz+jH7hxipZef5sCCiVJa1nevSOf/a0ZNa6agJA2pVN6E4hkd/gMdw0mAVU8OqqPWIkHTco8tzoBkeE6jaWGpqXb5/0TIUdzAsoEGlvkDJEI4/Bst7wT/S60mbnkp0ujbwoezhMH9/RI0jtVzAxJMiyVMpfL3r1ClDLqlSRFAStU5zqcvUEzVHVDv2BOeO8en7gYkLZjUWEsyBVTvAArutiTAd3DyorjB5kUp3o15WD+9by5ZBI7lcZp+WcsUbMV38ih5pLhhDs0Y3ZaZhS4mEZl8ramUkh+Keng/6BUpmEEW62XqTuq3pIcpZDVSrIVtFLvkcUObUuCwG2KPHx/fEbWBuj7fqPOnwUj5pbtriCvAeBE8wn3piWgFBKTQ3MgsEZbVUa7U2WV5xfbB76MTRqA9jzCDm3i9av/1uqD8jgGj/Eifh8op0LjEk0DoATY6y9OJMx2Ep81a6rTUuV+toIvYV3PdGxQkYKcsmVUKQmpe/SI3k5sslstRuWttowff41+cxy+zi5j30rYiNZcO6CkszWtfLGkNc/x/mTwmjGfBoEzugK83UYAKvkg4/O2pxrbUq0TZ8feM9DDhNxdS7N+32qBJd/EQGdf0lPuB1esdaw2UZjHEtZ5HRgPngK7P4Q4nmVyQBK3ekgWdVnI95mQ=
-  file_glob: true
-  file: wheelhouse/*  
-  skip_cleanup: true
-  on:
-    tags: true  
+# deploy:
+#   provider: releases
+#   api_key:
+#     secure: lJVNIXit3OVzJY+NuOhjz+jH7hxipZef5sCCiVJa1nevSOf/a0ZNa6agJA2pVN6E4hkd/gMdw0mAVU8OqqPWIkHTco8tzoBkeE6jaWGpqXb5/0TIUdzAsoEGlvkDJEI4/Bst7wT/S60mbnkp0ujbwoezhMH9/RI0jtVzAxJMiyVMpfL3r1ClDLqlSRFAStU5zqcvUEzVHVDv2BOeO8en7gYkLZjUWEsyBVTvAArutiTAd3DyorjB5kUp3o15WD+9by5ZBI7lcZp+WcsUbMV38ih5pLhhDs0Y3ZaZhS4mEZl8ramUkh+Keng/6BUpmEEW62XqTuq3pIcpZDVSrIVtFLvkcUObUuCwG2KPHx/fEbWBuj7fqPOnwUj5pbtriCvAeBE8wn3piWgFBKTQ3MgsEZbVUa7U2WV5xfbB76MTRqA9jzCDm3i9av/1uqD8jgGj/Eifh8op0LjEk0DoATY6y9OJMx2Ep81a6rTUuV+toIvYV3PdGxQkYKcsmVUKQmpe/SI3k5sslstRuWttowff41+cxy+zi5j30rYiNZcO6CkszWtfLGkNc/x/mTwmjGfBoEzugK83UYAKvkg4/O2pxrbUq0TZ8feM9DDhNxdS7N+32qBJd/EQGdf0lPuB1esdaw2UZjHEtZ5HRgPngK7P4Q4nmVyQBK3ekgWdVnI95mQ=
+#   file_glob: true
+#   file: wheelhouse/*  
+#   skip_cleanup: true
+#   on:
+#     tags: true  
