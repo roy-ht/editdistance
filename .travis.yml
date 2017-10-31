@@ -1,11 +1,9 @@
 language: python
+services: docker
+sudo: required
+os: [osx, linux]
 python: ['2.7', '3.6']
-matrix:
-  include:
-    - sudo: required
-      services:
-        - docker
-    - os: osx
+      
 
 script:
   - pip install cibuildwheel==0.6.0
