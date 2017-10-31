@@ -3,10 +3,10 @@ sudo: required
 os:
 - osx
 - linux
-env:
-  global:
-    - CIBW_TEST_REQUIRES=nose
-    - CIBW_TEST_COMMAND="nosetests {project}/test"
+# env:
+#   global:
+#     - CIBW_TEST_REQUIRES=nose
+#     - CIBW_TEST_COMMAND="nosetests {project}/test"
 
 script:
 - pip install cibuildwheel==0.6.0
