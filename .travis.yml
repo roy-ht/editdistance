@@ -2,7 +2,6 @@ language: python
 services: docker
 sudo: required
 os: [osx, linux]
-python: ['2.7', '3.6']
       
 
 script:
