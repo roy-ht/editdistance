@@ -1,7 +1,6 @@
-language: c
+language: ruby
 sudo: required
 os:
-- osx
 - linux
 # env:
 #   global:
@@ -9,8 +8,9 @@ os:
 #     - CIBW_TEST_COMMAND="nosetests {project}/test"
 
 script:
-- pip install cibuildwheel==0.6.0
-- cibuildwheel --output-dir wheelhouse
+- echo hello
+# - pip install cibuildwheel==0.6.0
+# - cibuildwheel --output-dir wheelhouse
 
 # deploy:
 #   provider: releases
