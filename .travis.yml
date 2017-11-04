@@ -1,13 +1,15 @@
-language: ruby
 sudo: required
 services: [docker]
-os:
-- linux
-- osx
 env:
   global:
     - CIBW_TEST_REQUIRES=nose
     - CIBW_TEST_COMMAND="nosetests {project}/test"
+matrix:
+  include:
+    - os: linux
+      language: python
+    - os: osx
+      language: c
 
 script:
 - pip install cibuildwheel==0.6.0
