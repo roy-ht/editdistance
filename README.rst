@@ -9,7 +9,12 @@ This library simply implements `Levenshtein distance <http://en.wikipedia.org/wi
 The algorithm used in this library is proposed by
 `Heikki Hyyrö, "Explaining and extending the bit-parallel approximate string matching algorithm of Myers", (2001). <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.19.7158&rep=rep1&type=pdf>`_.
 
-Tested on Python 2.7.5 and 3.3.2.
+-------------
+Binary wheels
+-------------
+
+Thanks to `joerick/cibuildwheel <https://github.com/joerick/cibuildwheel>`_, 
+There are binary wheels on Linux, Mac OS, and Windows.
 
 -------
 Install
