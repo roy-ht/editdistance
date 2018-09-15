@@ -5,7 +5,7 @@ environment:
 
 
 build_script:
-  - pip install cibuildwheel==0.6.0
+  - pip install cibuildwheel==0.9.4
   - cibuildwheel --output-dir wheelhouse
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true") {

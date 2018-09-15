@@ -13,7 +13,7 @@ matrix:
       language: ruby
 
 script:
-- pip install cibuildwheel==0.6.0
+- pip install cibuildwheel==0.9.4
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
