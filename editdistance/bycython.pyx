@@ -8,7 +8,7 @@ cdef extern from "./_editdistance.h":
     ctypedef int int64_t
     unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int64_t *b, const unsigned int bsize)
 
-cpdef unsigned int eval(object a, object b):
+cpdef unsigned int eval(object a, object b) except 0xffffffffffffffff:
     cdef unsigned int i, dist
     cdef int64_t *al = <int64_t *>malloc(len(a) * sizeof(int64_t))
     for i in range(len(a)):
