@@ -13,18 +13,14 @@ matrix:
     - os: osx
       sudo: required
       language: generic
-      addons:
-        homebrew:
-          packages:
-            - python3
 
 script:
 - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      which python3
-      which pip3
+      sudo pip3 install cibuildwheel==0.10.1 twine
+    else
+      pip3 install cibuildwheel==0.10.1 twine
     fi
-- pip3 install cibuildwheel==0.10.1 twine
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
