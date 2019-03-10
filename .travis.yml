@@ -10,7 +10,7 @@ matrix:
     - os: linux
       language: python
     - os: osx
-      language: ruby
+      language: generic
 
 script:
 - pip install cibuildwheel==0.9.4
