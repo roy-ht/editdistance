@@ -27,6 +27,7 @@ script:
     if [[ $TRAVIS_TAG ]]; then
       if [[ -n $INSTALL_SOURCE ]]; then
         python3 setup.py sdist
+        twine upload dist/*
       fi
       twine upload wheelhouse/*.whl
     fi
