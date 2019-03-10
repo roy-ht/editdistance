@@ -17,17 +17,16 @@ matrix:
 script:
 - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      virtualenv .env
-      source .env/bin/activate
-      which python
-      which pip
+      brew install python3
+      which python3
+      which pip3
     fi
-- pip install cibuildwheel==0.10.1 twine
+- pip3 install cibuildwheel==0.10.1 twine
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
       if [[ -n $INSTALL_SOURCE ]]; then
-        python setup.py sdist
+        python3 setup.py sdist
       fi
       twine upload wheelhouse/*.whl
     fi
