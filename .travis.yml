@@ -13,11 +13,14 @@ matrix:
     - os: osx
       sudo: required
       language: generic
+      addons:
+        homebrew:
+          packages:
+            - python3
 
 script:
 - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      brew install python3
       which python3
       which pip3
     fi
