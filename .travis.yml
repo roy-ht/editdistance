@@ -1,5 +1,3 @@
-sudo: required
-services: [docker]
 env:
   global:
     - CIBW_TEST_REQUIRES=nose
@@ -8,18 +6,23 @@ env:
 matrix:
   include:
     - os: linux
+      dist: xenial
       language: python
       env:
         - INSTALL_SOURCE=true
-        - PIP=pip
     - os: osx
+      sudo: required
       language: generic
-      env:
-        - PIP=pip2
 
 script:
-- pip install cibuildwheel==0.10.1 twine --user
-- export PATH="$(python -m site --user-base)/bin:$PATH"
+- |
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      virtualenv .env
+      source .env/bin/activate
+      which python
+      which pip
+    fi
+- pip install cibuildwheel==0.10.1 twine
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
