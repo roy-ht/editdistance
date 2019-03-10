@@ -9,11 +9,13 @@ matrix:
   include:
     - os: linux
       language: python
+      env: PIP=pip
     - os: osx
       language: generic
+      env: PIP=pip2
 
 script:
-- pip install cibuildwheel==0.9.4
+- pip install cibuildwheel==0.10.1
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
