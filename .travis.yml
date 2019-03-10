@@ -19,6 +19,7 @@ matrix:
 
 script:
 - pip install cibuildwheel==0.10.1 twine --user
+- export PATH="$(python -m site --user-base)/bin:$PATH"
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
