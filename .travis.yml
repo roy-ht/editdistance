@@ -9,16 +9,21 @@ matrix:
   include:
     - os: linux
       language: python
-      env: PIP=pip
+      env:
+        - INSTALL_SOURCE=true
+        - PIP=pip
     - os: osx
       language: generic
-      env: PIP=pip2
+      env:
+        - PIP=pip2
 
 script:
-- pip install cibuildwheel==0.10.1
+- pip install cibuildwheel==0.10.1 twine --user
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
-      python -m pip install twine
-      python -m twine upload wheelhouse/*.whl
+      if [[ -n $INSTALL_SOURCE ]]; then
+        python setup.py sdist
+      fi
+      twine upload wheelhouse/*.whl
     fi
