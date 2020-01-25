@@ -31,11 +31,14 @@ ext_modules = [
     )
 ]
 
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
+
 setup(
     name="editdistance",
     version='0.5.3',
     description="Fast implementation of the edit distance(Levenshtein distance)",
-    long_description='',
+    long_description=readme,
     author='Hiroyuki Tanaka',
     author_email='aflc0x@gmail.com',
     url='https://www.github.com/aflc/editdistance',
