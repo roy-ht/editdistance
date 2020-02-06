@@ -1,7 +1,7 @@
 env:
   global:
     - CIBW_TEST_REQUIRES=nose
-    - CIBW_TEST_COMMAND="nosetests {project}/test"
+    - CIBW_TEST_COMMAND="pip3 install -r {project}/requirements/test.txt && nosetests {project}/test"
     - TWINE_USERNAME=aflc
 matrix:
   include:
@@ -15,13 +15,15 @@ matrix:
       sudo: required
       language: generic
 
-script:
+install:
 - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       sudo pip3 install cibuildwheel==0.10.1 twine
     else
       pip3 install cibuildwheel==0.10.1 twine
     fi
+
+script:
 - cibuildwheel --output-dir wheelhouse
 - |
     if [[ $TRAVIS_TAG ]]; then
