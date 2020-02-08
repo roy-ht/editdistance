@@ -1,12 +1,15 @@
 environment:
   TWINE_USERNAME: aflc
+  CIBW_SKIP: cp27-*
   CIBW_TEST_REQUIRES: nose
-  CIBW_TEST_COMMAND: "nosetests {project}/test"
+  CIBW_TEST_COMMAND: "python -m pip install -r {project}\\requirements\\test.txt && nosetests {project}\\test"
 
+
+install:
+  - python -m pip install cibuildwheel==1.1.0
 
 build_script:
-  - pip install cibuildwheel==0.9.4
-  - cibuildwheel --output-dir wheelhouse
+  - python -m cibuildwheel --output-dir wheelhouse
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true") {
         python -m pip install twine

@@ -39,6 +39,15 @@ It's quite simple:
     editdistance.eval('banana', 'bahama')
     # 2L
 
+-----
+Test
+-----
+
+.. code-block:: bash
+
+    pip install -r requirements/test.txt
+    pytest test/
+
 
 ----------------
 Simple Benchmark
