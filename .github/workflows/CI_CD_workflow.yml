@@ -1,0 +1,65 @@
+name: CI_CD
+
+on: [push, pull_request]
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build wheels
+        uses: joerick/cibuildwheel@v1.9.0
+        with:
+          output-dir: wheelhouse
+        # to supply options, put them in 'env', like:
+        env:
+          CIBW_SKIP: "cp27-*"
+          CIBW_TEST_REQUIRES: nose
+          CIBW_TEST_COMMAND: "nosetests {project}/test"
+
+      - name: Show built files
+        shell: bash
+        run: ls -la wheelhouse
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: wheels
+          path: ./wheelhouse/*.whl
+
+  deploy:
+    name: Uploading to PyPi
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    needs: [build_wheels]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Build sdist
+        run: python setup.py sdist
+
+      - name: Download wheels
+        uses: actions/download-artifact@v2
+        with:
+          name: wheels
+          path: dist
+
+      - name: Show files to upload
+        shell: bash
+        run: ls -la dist
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@1.4.2
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN  }}
