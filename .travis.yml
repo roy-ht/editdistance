@@ -1,5 +1,6 @@
 env:
   global:
+    - CIBW_SKIP="cp27-*"
     - CIBW_TEST_REQUIRES=nose
     - CIBW_TEST_COMMAND="nosetests {project}/test"
     - TWINE_USERNAME=aflc
@@ -7,6 +8,15 @@ matrix:
   include:
     - os: linux
       dist: xenial
+      language: python
+      python: 3.6
+      env:
+        - INSTALL_SOURCE=true
+    - os: linux
+      arch: arm64-graviton2
+      dist: xenial
+      group: edge
+      virt: lxd
       language: python
       python: 3.6
       env:
@@ -20,7 +30,7 @@ script:
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       sudo pip3 install cibuildwheel==0.10.1 twine
     else
-      pip3 install cibuildwheel==0.10.1 twine
+      pip3 install cibuildwheel==1.10.0 twine
     fi
 - cibuildwheel --output-dir wheelhouse
 - |
