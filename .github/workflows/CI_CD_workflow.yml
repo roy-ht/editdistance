@@ -23,6 +23,8 @@ jobs:
           CIBW_SKIP: "cp27-*"
           CIBW_TEST_REQUIRES: nose
           CIBW_TEST_COMMAND: "nosetests {project}/test"
+          CIBW_ARCHS_MACOS: "x86_64 universal2 arm64"
+          CIBW_ARCHS_LINUX: "auto aarch64"
 
       - name: Show built files
         shell: bash
