@@ -31,12 +31,16 @@ ext_modules = [
     )
 ]
 
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
+
 setup(
     name="editdistance",
     version='0.5.3',
     python_requires='>=3.5',
     description="Fast implementation of the edit distance(Levenshtein distance)",
-    long_description='',
+    long_description=readme,
+    long_description_content_type ='text/x-rst',
     author='Hiroyuki Tanaka',
     author_email='aflc0x@gmail.com',
     url='https://www.github.com/roy-ht/editdistance',
