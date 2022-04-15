@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: ls -la wheelhouse
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: wheels
           path: ./wheelhouse/*.whl
