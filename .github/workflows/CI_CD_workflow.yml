@@ -27,8 +27,8 @@ jobs:
         # to supply options, put them in 'env', like:
         env:
           CIBW_SKIP: "cp27-*"
-          CIBW_TEST_REQUIRES: nose
-          CIBW_TEST_COMMAND: "nosetests {project}/test"
+          CIBW_TEST_REQUIRES: pytest
+          CIBW_TEST_COMMAND: "pytest {project}/test"
           CIBW_ARCHS_MACOS: "x86_64 universal2 arm64"
           CIBW_ARCHS_LINUX: "auto aarch64"
 
