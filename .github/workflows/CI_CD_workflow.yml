@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
@@ -21,14 +21,14 @@ jobs:
           platforms: all
 
       - name: Build wheels
-        uses: joerick/cibuildwheel@v1.9.0
+        uses: joerick/cibuildwheel@v2.11.1
         with:
           output-dir: wheelhouse
         # to supply options, put them in 'env', like:
         env:
-          CIBW_SKIP: "cp27-*"
-          CIBW_TEST_REQUIRES: nose
-          CIBW_TEST_COMMAND: "nosetests {project}/test"
+          CIBW_SKIP: "{cp27-*,cp311-*}"
+          CIBW_TEST_REQUIRES: pytest
+          CIBW_TEST_COMMAND: "pytest {project}/test"
           CIBW_ARCHS_MACOS: "x86_64 universal2 arm64"
           CIBW_ARCHS_LINUX: "auto aarch64"
 
@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: ls -la wheelhouse
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: wheels
           path: ./wheelhouse/*.whl
@@ -48,16 +48,16 @@ jobs:
     needs: [build_wheels]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/checkout@v3
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8
+          python-version: 3.9
       - name: Build sdist
         run: python setup.py sdist
 
       - name: Download wheels
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: wheels
           path: dist
