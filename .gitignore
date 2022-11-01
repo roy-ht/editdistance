@@ -1,3 +1,6 @@
+# built file
+editdistance/bycython.cpp
+
 tests/resources/PE2017
 
 # Do not ship old c_matrix*.c files, due to
