@@ -12,7 +12,7 @@
         "language": "c++",
         "name": "editdistance.bycython",
         "sources": [
-            "/Users/marcusmccurdy/code/editdistance/editdistance/bycython.pyx",
+            "editdistance/bycython.pyx",
             "editdistance/_editdistance.cpp"
         ]
     },
