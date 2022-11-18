@@ -21,15 +21,8 @@ except:
     from distutils import Extension, setup
 
 from Cython.Build import cythonize
-cythonize('editdistance/bycython.pyx')
 
-ext_modules = [
-    Extension(
-        "editdistance.bycython",
-        ["editdistance/_editdistance.cpp", "editdistance/bycython.cpp"],
-        include_dirs=["./editdistance"],
-    )
-]
+ext_modules = cythonize("editdistance/bycython.pyx")
 
 with open("README.rst") as readme_file:
     readme = readme_file.read()
