@@ -26,7 +26,7 @@ jobs:
           output-dir: wheelhouse
         # to supply options, put them in 'env', like:
         env:
-          CIBW_SKIP: "{cp27-*,cp311-*}"
+          CIBW_SKIP: "{cp27-*}"
           CIBW_TEST_REQUIRES: pytest
           CIBW_TEST_COMMAND: "pytest {project}/test"
           CIBW_ARCHS_MACOS: "x86_64 universal2 arm64"

@@ -19,9 +19,9 @@ try:
     from setuptools import Extension, setup
 except:
     from distutils import Extension, setup
-# for development
-# from Cython.Build import cythonize
-# ext_modules = cythonize('editdistance/bycython.pyx')
+
+from Cython.Build import cythonize
+cythonize('editdistance/bycython.pyx')
 
 ext_modules = [
     Extension(
@@ -57,6 +57,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
