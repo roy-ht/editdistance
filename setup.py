@@ -39,7 +39,9 @@ setup(
     url="https://www.github.com/roy-ht/editdistance",
     ext_modules=ext_modules,
     packages=["editdistance"],
-    package_data={"editdistance": ["_editdistance.h", "def.h"]},
+    package_data={
+        "editdistance": ["__init__.pxd", "_editdistance.h", "bycython.pxd", "def.h"]
+    },
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
