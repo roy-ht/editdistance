@@ -29,7 +29,7 @@ with open("README.rst") as readme_file:
 
 setup(
     name="editdistance",
-    version="0.6.1",
+    version="0.6.2",
     python_requires=">=3.6",
     description="Fast implementation of the edit distance(Levenshtein distance)",
     long_description=readme,
