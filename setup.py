@@ -21,22 +21,15 @@ except:
     from distutils import Extension, setup
 
 from Cython.Build import cythonize
-cythonize('editdistance/bycython.pyx')
 
-ext_modules = [
-    Extension(
-        "editdistance.bycython",
-        ["editdistance/_editdistance.cpp", "editdistance/bycython.cpp"],
-        include_dirs=["./editdistance"],
-    )
-]
+ext_modules = cythonize("editdistance/bycython.pyx")
 
 with open("README.rst") as readme_file:
     readme = readme_file.read()
 
 setup(
     name="editdistance",
-    version="0.6.1",
+    version="0.6.2",
     python_requires=">=3.6",
     description="Fast implementation of the edit distance(Levenshtein distance)",
     long_description=readme,
@@ -46,7 +39,9 @@ setup(
     url="https://www.github.com/roy-ht/editdistance",
     ext_modules=ext_modules,
     packages=["editdistance"],
-    package_data={"editdistance": ["_editdistance.h", "def.h"]},
+    package_data={
+        "editdistance": ["__init__.pxd", "_editdistance.h", "bycython.pxd", "def.h"]
+    },
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
