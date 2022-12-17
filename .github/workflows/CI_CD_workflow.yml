@@ -53,8 +53,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
+      - name: setup build
+        run: pip install build
       - name: Build sdist
-        run: python setup.py sdist
+        run: ython -m build --sdist .
 
       - name: Download wheels
         uses: actions/download-artifact@v3
