@@ -56,7 +56,7 @@ jobs:
       - name: setup build
         run: pip install build
       - name: Build sdist
-        run: ython -m build --sdist .
+        run: python -m build --sdist .
 
       - name: Download wheels
         uses: actions/download-artifact@v3
