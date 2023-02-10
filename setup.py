@@ -29,7 +29,7 @@ with open("README.rst") as readme_file:
 
 setup(
     name="editdistance",
-    version="0.6.2",
+    version="0.6.3",
     python_requires=">=3.6",
     description="Fast implementation of the edit distance(Levenshtein distance)",
     long_description=readme,
@@ -40,7 +40,7 @@ setup(
     ext_modules=ext_modules,
     packages=["editdistance"],
     package_data={
-        "editdistance": ["__init__.pxd", "_editdistance.h", "bycython.pxd", "def.h"]
+        "editdistance": ["__init__.pxd", "__init__.py ", "_editdistance.cpp ", "_editdistance.h", "bycython.pxd", "bycython.pyx" "def.h"]
     },
     classifiers=[
         "License :: OSI Approved :: MIT License",
