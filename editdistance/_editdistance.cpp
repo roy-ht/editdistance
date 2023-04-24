@@ -61,15 +61,14 @@ unsigned int edit_distance_bpv(T &cmap, int64_t const *vec, size_t const &vecsiz
 
 
 /// c.f. http://handasse.blogspot.com/2009/04/c_29.html
-template<typename T>
-unsigned int edit_distance_dp(T const *str1, size_t const size1, T const *str2, size_t const size2) {
+unsigned int edit_distance_dp(int64_t const *str1, size_t const size1, int64_t const *str2, size_t const size2) {
     // vectorより固定長配列の方が速いが、文字列が長い時の保険でのみ呼ばれるのでサイズを決め打ちできない
     vector< vector<uint32_t> > d(2, vector<uint32_t>(size2 + 1));
     d[0][0] = 0;
     d[1][0] = 1;
-    for (int i = 0; i < size2 + 1; i++) d[0][i] = i;
-    for (int i = 1; i < size1 + 1; i++) {
-        for (int j = 1; j < size2 + 1; j++) {
+    for (size_t i = 0; i < size2 + 1; i++) d[0][i] = i;
+    for (size_t i = 1; i < size1 + 1; i++) {
+        for (size_t j = 1; j < size2 + 1; j++) {
             d[i&1][j] = min(min(d[(i-1)&1][j], d[i&1][j-1]) + 1, d[(i-1)&1][j-1] + (str1[i-1] == str2[j-1] ? 0 : 1));
         }
     }
@@ -127,5 +126,5 @@ unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int
     else if(vsize == 8) return edit_distance_map_<8>(ap, *asizep, bp, *bsizep);
     else if(vsize == 9) return edit_distance_map_<9>(ap, *asizep, bp, *bsizep);
     else if(vsize == 10) return edit_distance_map_<10>(ap, *asizep, bp, *bsizep);
-    return edit_distance_dp<int64_t>(ap, *asizep, bp, *bsizep);  // dynamic programmingに任せる
+    return edit_distance_dp(ap, *asizep, bp, *bsizep);  // dynamic programmingに任せる
 }
