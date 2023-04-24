@@ -68,6 +68,7 @@ unsigned int edit_distance_dp(int64_t const *str1, size_t const size1, int64_t c
     d[1][0] = 1;
     for (size_t i = 0; i < size2 + 1; i++) d[0][i] = i;
     for (size_t i = 1; i < size1 + 1; i++) {
+        d[i&1][0] = d[(i-1)&1][0] + 1;
         for (size_t j = 1; j < size2 + 1; j++) {
             d[i&1][j] = min(min(d[(i-1)&1][j], d[i&1][j-1]) + 1, d[(i-1)&1][j-1] + (str1[i-1] == str2[j-1] ? 0 : 1));
         }
