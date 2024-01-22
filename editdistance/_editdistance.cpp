@@ -41,7 +41,7 @@ unsigned int edit_distance_bpv(T &cmap, int64_t const *vec, size_t const &vecsiz
     for(size_t i = 0; i < tlen; ++i) VP[tmax] |= (1LL << i);
     for(size_t i = 0; i < vecsize; ++i) {
         TVALUE &PM = cmap[vec[i]];
-        for(int r = 0; r <= tmax; ++r) {
+        for(unsigned int r = 0; r <= tmax; ++r) {
             uint64_t X = PM[r];
             if(r > 0 && (HN[r - 1] & lmb)) X |= 1LL;
             D0[r] = (((X & VP[r]) + VP[r]) ^ VP[r]) | X | VN[r];
@@ -67,13 +67,34 @@ unsigned int edit_distance_dp(T const *str1, size_t const size1, T const *str2, 
     vector< vector<uint32_t> > d(2, vector<uint32_t>(size2 + 1));
     d[0][0] = 0;
     d[1][0] = 1;
-    for (int i = 0; i < size2 + 1; i++) d[0][i] = i;
-    for (int i = 1; i < size1 + 1; i++) {
-        for (int j = 1; j < size2 + 1; j++) {
+    for (size_t i = 0; i < size2 + 1; i++) d[0][i] = i;
+    for (size_t i = 1; i < size1 + 1; i++) {
+        for (size_t j = 1; j < size2 + 1; j++) {
             d[i&1][j] = min(min(d[(i-1)&1][j], d[i&1][j-1]) + 1, d[(i-1)&1][j-1] + (str1[i-1] == str2[j-1] ? 0 : 1));
         }
     }
     return d[size1&1][size2];
+}
+
+template<typename T>
+bool edit_distancec_dp(T const *str1, size_t const size1, T const *str2, size_t const size2, unsigned int const thr) {
+    vector< vector<uint32_t> > d(2, vector<uint32_t>(size2 + 1));
+    d[0][0] = 0;
+    d[1][0] = 1;
+    for (size_t i = 0; i < size2 + 1; i++) d[0][i] = i;
+    for (size_t i = 1; i < size1 + 1; i++) {
+        bool below_thr = false;
+        for (size_t j = 1; j < size2 + 1; j++) {
+            d[i&1][j] = min(min(d[(i-1)&1][j], d[i&1][j-1]) + 1, d[(i-1)&1][j-1] + (str1[i-1] == str2[j-1] ? 0 : 1));
+            if (d[i%1][j] <= thr) {
+                below_thr = true;
+            }
+        }
+        if (!below_thr) {
+            return false;
+        }
+    }
+    return d[size1&1][size2] <= thr;
 }
 
 template <size_t N>
@@ -129,3 +150,28 @@ unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int
     else if(vsize == 10) return edit_distance_map_<10>(ap, *asizep, bp, *bsizep);
     return edit_distance_dp<int64_t>(ap, *asizep, bp, *bsizep);  // dynamic programmingに任せる
 }
+
+bool edit_distance_criterion(const int64_t *a, const unsigned int asize, const int64_t *b, const unsigned int bsize, const unsigned int thr) {
+    if(asize == 0) return bsize <= thr;
+    if(bsize == 0) return asize <= thr;
+    // 要素数の大きいほうがa
+    int64_t const *ap, *bp;
+    unsigned int const *asizep, *bsizep;
+    if(asize < bsize) ap = b, bp = a, asizep = &bsize, bsizep = &asize;
+    else ap = a, bp = b, asizep = &asize, bsizep = &bsize;
+    // 必要な配列サイズを調べる
+    size_t vsize = ((*asizep - 1) >> 6) + 1;  // 64までは1, 128までは2, ...
+    // bit-parallelでできそうな限界を超えたら要素数の小さい方をaとする。
+    if(vsize > 10) {
+        int64_t const *_ = ap;
+        unsigned int const *__ = asizep;
+        ap = bp, bp = _, asizep = bsizep, bsizep = __;
+        vsize = ((*asizep - 1) >> 6) + 1;
+    }
+
+    return edit_distancec_dp<int64_t>(ap, *asizep, bp, *bsizep, thr);  // dynamic programmingに任せる
+}
+
+
+
+

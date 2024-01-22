@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 unsigned int edit_distance(const int64_t *a, const unsigned int asize, const int64_t *b, const unsigned int bsize);
+bool edit_distance_criterion(const int64_t *a, const unsigned int asize, const int64_t *b, const unsigned int bsize, const unsigned int thr);
 
 #ifdef __cplusplus
 }
