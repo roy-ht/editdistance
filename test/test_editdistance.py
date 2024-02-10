@@ -7,6 +7,11 @@ class TestEditDistance(unittest.TestCase):
         import editdistance
         self.assertEqual(1, editdistance.eval('abc', 'aec'))
 
+    def test_editdistance_criterion(self):
+        import editdistance
+        self.assertEqual(False, editdistance.eval_criterion('abcb', 'aeca', 1))
+        self.assertEqual(True, editdistance.eval_criterion('abc', 'aec', 1))
+   
     def test_dp_editdistance(self):
         from editdistance.bycython import eval_dp
         self.assertEqual(3, eval_dp('bbb', 'a'))
@@ -20,7 +25,7 @@ class TestEditDistance(unittest.TestCase):
             seq2 = random.choices([0, 1, 2], k=random.randint(10, 50))
 
             self.assertEqual(editdistance.eval(seq1, seq2), eval_dp(seq1, seq2))
-    
+
 
 if __name__ == '__main__':
     unittest.main()
