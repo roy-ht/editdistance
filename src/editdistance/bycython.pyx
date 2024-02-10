@@ -1,5 +1,5 @@
 # distutils: language = c++
-# distutils: sources = editdistance/_editdistance.cpp
+# distutils: sources = src/editdistance/_editdistance.cpp
 
 from libc.stdlib cimport malloc, free
 # from libc.stdint cimport int64_t
