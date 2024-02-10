@@ -5,7 +5,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "editdistance"
-version = "0.7.0"
+version = "0.8.0"
 description = "Default template for PDM package"
 authors = [
     {name = "Hiroyuki Tanaka", email = "aflc0x@gmail.com"},
