@@ -1,3 +1,28 @@
 [build-system]
-requires = ["setuptools", "wheel", "Cython"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-backend", "cython"]
+build-backend = "pdm.backend"
+
+
+[project]
+name = "editdistance"
+version = "0.8.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Hiroyuki Tanaka", email = "aflc0x@gmail.com"},
+]
+dependencies = []
+
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.build]
+run-setuptools = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "cython>=3.0",
+]
