@@ -24,7 +24,7 @@ cpdef unsigned int eval(object a, object b) except 0xffffffffffffffff:
     free(al)
     free(bl)
     return dist
-  
+    
 cpdef bint eval_criterion(object a, object b, const unsigned int thr) except 0xffffffffffffffff:
     cdef unsigned int i
     cdef bint ret
@@ -39,7 +39,7 @@ cpdef bint eval_criterion(object a, object b, const unsigned int thr) except 0xf
     free(bl)
     return ret
 
-  cpdef unsigned int eval_dp(object a, object b) except 0xffffffffffffffff:
+cpdef unsigned int eval_dp(object a, object b) except 0xffffffffffffffff:
     cdef unsigned int i, dist
     cdef int64_t *al = <int64_t *>malloc(len(a) * sizeof(int64_t))
     for i in range(len(a)):
