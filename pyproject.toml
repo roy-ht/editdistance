@@ -5,8 +5,8 @@ build-backend = "pdm.backend"
 
 [project]
 name = "editdistance"
-version = "0.8.0"
-description = "Default template for PDM package"
+version = "0.8.1"
+description = "Fast implementation of the edit distance (Levenshtein distance)"
 authors = [
     {name = "Hiroyuki Tanaka", email = "aflc0x@gmail.com"},
 ]
