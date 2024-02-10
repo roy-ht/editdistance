@@ -11,10 +11,14 @@ authors = [
     {name = "Hiroyuki Tanaka", email = "aflc0x@gmail.com"},
 ]
 dependencies = []
-
 requires-python = ">=3.8"
 readme = "README.md"
 license = {text = "MIT"}
+
+[project.urls]
+Homepage = "https://github.com/roy-ht/editdistance"
+Documentation = "https://github.com/roy-ht/editdistance"
+Repository = "https://github.com/roy-ht/editdistance"
 
 [tool.pdm]
 distribution = true
